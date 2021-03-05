@@ -49,7 +49,7 @@ const App = ()=> {
           <div className="col-md-12">
             <ul className="list-group list-group-horizontal-md">
               <li className="list-group-item"><Link to='/'>Home</Link></li>
-              <li className="list-group-item"><Link to='/products'>Porduct List</Link></li>
+              <li className="list-group-item"><Link to='/products'>Porducts</Link></li>
             </ul>
           </div>
         </div>
