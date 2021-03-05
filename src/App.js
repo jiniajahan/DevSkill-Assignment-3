@@ -1,8 +1,11 @@
 import React,{ useState, useEffect } from 'react';
 import './App.css';
-import ProductList from '../src/ProductList';
-import Home from '../src/Home';
-import ProductDetail from './ProductDetail';
+import ProductList from "../src/Components/ProductList";
+import Home from '../src/Components/Home';
+import ProductDetail from '../src/Components/ProductDetail';
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+import products from "../src/Components/css/Products.module.css";
+import AddProduct from "../src/Components/AddProduct";
 
 
 import {
@@ -15,67 +18,47 @@ import {
 
 
 const App = ()=> {
-
-  const [productList,setProduct] = useState([
-    {
-        name: 'Mouse',
-        description: 'Mouse Description',
-        price: '1200',
-        category: 'Electronics',
-        },
-        {
-        name: 'Burger',
-        description: 'Burger Description',
-        price: '250',
-        category: 'Food',
-        },
-        {
-        name: 'Books',
-        description: 'Books Description',
-        price: '100',
-        category: 'Education',
-        }
-    ]);
-
-  const [item, setItem] = useState('');
-  const productHandleClick = (data) => {
-    setItem(data);
-  }
-
   return (
     <Router>
       <div className="container">
         <div className="row">
-          <div className="col-md-12">
-            <ul className="list-group list-group-horizontal-md">
-              <li className="list-group-item"><Link to='/'>Home</Link></li>
-              <li className="list-group-item"><Link to='/products'>Porducts</Link></li>
-            </ul>
+          <div className="col-md-12" style={{backgroundColor:"GrayText"}}>
+            <div className="d-flex">
+              <ul className={`list-inline mx-auto justify-content-center ${products.menu}`}>
+                <li className={`list-inline-item ${products.menuList}`} ><Link to='/' style={{color:"Menu"}}>Home</Link></li>
+                <li className={`list-inline-item ${products.menuList}`}><Link to='/products' style={{color:"Menu"}}>Porducts</Link></li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
       <div>
-        <switch>
+        <Switch>
           <Route exact path='/'>
               <Home />
           </Route>
-        </switch>
-        <switch>
+        </Switch>
+        <Switch>
           <Route exact path='/products'>
-              <ProductList productList={productList} detailsClick={productHandleClick} />
+              <ProductList />
           </Route>
-        </switch>
-        <switch>
-        <Route exact path={'/productDeteil/:id'}>
-          <ProductDetail details={item}  />
+        </Switch>
+        <Switch>
+          <Route exact path='/products/create'>
+              <AddProduct />
+          </Route>
+        </Switch>
+        <Switch>
+        <Route exact path={'/products/:id'}>
+          <ProductDetail />
         </Route>
-        </switch>
-        <switch>
+        </Switch>
+        <Switch>
         <Route path={'/404'}>
           <h1 className="not-found">404 NOT FOUND.........</h1>
         </Route>
-        </switch>
-        <switch><Route path={'*'} render={() => <Redirect to='/404' />} /></switch>
+        </Switch>
+        <Switch><Route path={'*'} render={() => <Redirect to='/404' />} /></Switch>
       </div>
     </Router>
   );

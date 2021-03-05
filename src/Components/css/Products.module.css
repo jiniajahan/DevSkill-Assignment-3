@@ -1,0 +1,42 @@
+.menu {
+  padding-top: 15px;
+}
+
+.menuList {
+  margin: 0 20px;
+}
+
+.home {
+  margin-top: 20px;
+}
+.header {
+  text-align: center;
+  font-size: 12px;
+  font-weight: 600;
+}
+.content {
+  margin-top: 20px;
+  padding: 0 20px;
+}
+.img {
+  width: 200px;
+  height: 180px;
+  float: left;
+}
+.price {
+  font-weight: bold;
+  font-size: 12px;
+}
+.font {
+  font-size: 12px;
+  margin-bottom: 0;
+}
+.text {
+  font-size: 12px;
+}
+.title {
+  font-size: 14px;
+}
+.addButton {
+  float: right;
+}
