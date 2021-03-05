@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Link,useParams } from "react-router-dom";
 import Loader from "../Components/Loader";
 import classes from "../Components/css/Products.module.css";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
 const ProductDetail = (props) => {
+    let history = useHistory();
     const params =useParams()
     const [loading, setLoading] = useState(true);
     const[product, setProduct] = useState([]);
@@ -22,7 +24,10 @@ const ProductDetail = (props) => {
         });
       },[]);
 
-
+      const deleteProduct = async id => {
+        await axios.delete(`https://fakestoreapi.com/products/${id}`);
+        history.push("/");
+      };
     return(
         <div className="container-fluid">
             
@@ -49,6 +54,11 @@ const ProductDetail = (props) => {
                             </div>
                         </div> 
                         <Link className="btn btn-primary" to="/">back to Home</Link> 
+                    <Link class="btn btn-outline-primary mr-2" to={`/products/edit/${product.id}`}>Edit</Link>
+                    <Link
+                    class="btn btn-danger"
+                    onClick={() => deleteProduct(product.id)}>Delete</Link>
+                        
                   </div>
                 )
             }

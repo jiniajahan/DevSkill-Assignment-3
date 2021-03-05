@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Link,useParams } from "react-router-dom";
-import classes from "../Components/css/Products.module.css";
-import { useHistory } from "react-router-dom";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { useHistory, useParams } from "react-router-dom";
 
-const AddProduct = () =>{
+const EditProduct = () => {
   let history = useHistory();
+  const { id } = useParams();
   const [product, setProduct] = useState({
     title: "",
     description: "",
@@ -21,20 +20,28 @@ const AddProduct = () =>{
       { ...price, [e.target.price]: e.target.value }
       );
   };
- 
+
+  useEffect(() => {
+    loadProduct();
+  }, []);
+
   const onSubmit = async e => {
     e.preventDefault();
-    axios.post("https://fakestoreapi.com/products", product);
+    axios.patch(`https://fakestoreapi.com/products/${id}`, product);
     history.push("/");
   };
 
-    return(
-      <div className="container">
+  const loadProduct = async () => {
+    const result = await axios.get(`https://fakestoreapi.com/products/${id}`);
+    setProduct(result.data);
+  };
+  return (
+    <div className="container">
       <div className="w-75 mx-auto shadow p-5">
-        <h2 className="text-center mb-4">Add A User</h2>
+        <h2 className="text-center mb-4">Edit The Product</h2>
         <form onSubmit={e => onSubmit(e)}>
           <div className="form-group">
-            <input
+          <input
               type="text"
               className="form-control form-control-lg"
               placeholder="title"
@@ -44,7 +51,7 @@ const AddProduct = () =>{
             />
           </div>
           <div className="form-group">
-            <input
+          <input
               type="text"
               className="form-control form-control-lg"
               placeholder="description"
@@ -54,7 +61,7 @@ const AddProduct = () =>{
             />
           </div>
           <div className="form-group">
-            <input
+          <input
               type="text"
               className="form-control form-control-lg"
               placeholder="category"
@@ -64,7 +71,7 @@ const AddProduct = () =>{
             />
           </div>
           <div className="form-group">
-            <input
+          <input
               type="text"
               className="form-control form-control-lg"
               placeholder="price"
@@ -73,11 +80,11 @@ const AddProduct = () =>{
               onChange={e => onInputChange(e)}
             />
           </div>
-          <button className="btn btn-primary btn-block">Add Product</button>
+          <button className="btn btn-primary btn-block">Update</button>
         </form>
       </div>
     </div>
-    )
-}
+  );
+};
 
-export default AddProduct;
+export default EditProduct;

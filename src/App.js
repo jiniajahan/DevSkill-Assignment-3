@@ -6,6 +6,7 @@ import ProductDetail from '../src/Components/ProductDetail';
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import products from "../src/Components/css/Products.module.css";
 import AddProduct from "../src/Components/AddProduct";
+import ProductEdit from "../src/Components/EditProduct";
 
 
 import {
@@ -51,6 +52,11 @@ const App = ()=> {
         <Switch>
         <Route exact path={'/products/:id'}>
           <ProductDetail />
+        </Route>
+        </Switch>
+        <Switch>
+        <Route exact path={'/products/edit/:id'}>
+          <ProductEdit />
         </Route>
         </Switch>
         <Switch>
