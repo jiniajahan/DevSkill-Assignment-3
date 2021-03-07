@@ -10,6 +10,7 @@ const ProductDetail = (props) => {
     const params =useParams()
     const [loading, setLoading] = useState(true);
     const[product, setProduct] = useState([]);
+     const [found,setFound]=useState(null)
    
 
     const { id } = useParams();
@@ -21,6 +22,7 @@ const ProductDetail = (props) => {
         })
         .catch((err)=>{
           console.log(err.data);
+          setFound(err.data)
         });
       },[]);
 
